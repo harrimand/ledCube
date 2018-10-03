@@ -33,7 +33,8 @@ class Led:
                     "shiftUp": self.shiftUp,
                     "shiftDown": self.shiftDown,
                     "mixDown": self.mixDown,
-                    "mixUp": self.mixUp
+                    "mixUp": self.mixUp,
+                    "fig8Z": self.fig8Z
                     }
 
     def ledScatter(self):
@@ -284,6 +285,17 @@ class Led:
         '''Rotate Cube counterclockwise from TOP view '''
         cuben = self.newCube(4, 4, 4)
         ocSeq = [1, 5, 6, 2, 0, 9, 10, 3, 4, 13, 14, 7, 8, 12, 15, 11]
+        for L in range(4):
+            for nc, oc in enumerate(ocSeq):
+                cuben[L][int(nc/4)][nc%4] = self.cube[L][int(oc/4)][oc%4]
+        self.cube = cuben.copy()
+
+# ------------------------------------------------------------------------------
+
+    def fig8Z(self):
+        '''Figure 8 from TOP view '''
+        cuben = self.newCube(4, 4, 4)
+        ocSeq = [1, 5, 6, 2, 0, 10, 9, 3, 4, 13, 14, 7, 8, 12, 15, 11]
         for L in range(4):
             for nc, oc in enumerate(ocSeq):
                 cuben[L][int(nc/4)][nc%4] = self.cube[L][int(oc/4)][oc%4]
