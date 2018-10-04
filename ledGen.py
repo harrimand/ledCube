@@ -132,6 +132,12 @@ cubeStr.append("FFFF, 0000, 0000, 0000")
 cubeFun("rotateYccw", 12)
 
 #----------------------------------------------------------------------
+#Create cubes and animation data
+
+cubeStr.append("FFF0, F000, 0000, 0000")
+cubeFun("rotateXccw", 2)
+
+#----------------------------------------------------------------------
 #Tumble Forward Strings
 cubeStrA = []
 cubeStrA.append("0F00, F000, F000, F000")
@@ -229,6 +235,7 @@ if(0):
         print("\nCube#: ", i, "Size: ", c[0].seqSize)
         for n, a in enumerate(c):
             print(n, " : ", a)
+            a.printCube()
 
 #----------------------------------------------------------------------
 # Create list of sequence sizes
@@ -236,7 +243,7 @@ seqSizes = [c[0].seqSize for c in cubes]
 print("\nSequence Sizes: ", seqSizes)
 
 # Flatten Cube List for animation
-cubePlots = [p for sl in cubes for p in sl] #Flatten cubes list
+cubePlots = [p for sl in cubes for p in sl]
 
 #----------------------------------------------------------------------
 # Generate and print asm data

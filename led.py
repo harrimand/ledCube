@@ -100,27 +100,38 @@ class Led:
     def rotateZccw(self):
         '''Rotate Cube counterclockwise from TOP view '''
         cuben = self.newCube(4, 4, 4)
+        ocSeq = [1, 2, 3, 7, 0, 6, 10, 11, 4, 5, 9, 15, 8, 12, 13, 14]
         for L in range(4):
-            T = self.cube[L][0][0]
-            cuben[L][0][0] = self.cube[L][0][1]
-            cuben[L][0][1] = self.cube[L][0][2]
-            cuben[L][0][2] = self.cube[L][0][3]
-            cuben[L][0][3] = self.cube[L][1][3]
-            cuben[L][1][3] = self.cube[L][2][3]
-            cuben[L][2][3] = self.cube[L][3][3]
-            cuben[L][3][3] = self.cube[L][3][2]
-            cuben[L][3][2] = self.cube[L][3][1]
-            cuben[L][3][1] = self.cube[L][3][0]
-            cuben[L][3][0] = self.cube[L][2][0]
-            cuben[L][2][0] = self.cube[L][1][0]
-            cuben[L][1][0] = T
-            T = self.cube[L][1][1]
-            cuben[L][1][1] = self.cube[L][1][2]
-            cuben[L][1][2] = self.cube[L][2][2]
-            cuben[L][2][2] = self.cube[L][2][1]
-            cuben[L][2][1] = T
+            for nc, oc in enumerate(ocSeq):
+                cuben[L][int(nc/4)][nc%4] = self.cube[L][int(oc/4)][oc%4]
         self.cube = cuben.copy()
 
+# ------------------------------------------------------------------------------
+#    def XrotateZccw(self):
+#        '''Rotate Cube counterclockwise from TOP view '''
+#        cuben = self.newCube(4, 4, 4)
+#        for L in range(4):
+#            T = self.cube[L][0][0]
+#            cuben[L][0][0] = self.cube[L][0][1]
+#            cuben[L][0][1] = self.cube[L][0][2]
+#            cuben[L][0][2] = self.cube[L][0][3]
+#            cuben[L][0][3] = self.cube[L][1][3]
+#            cuben[L][1][3] = self.cube[L][2][3]
+#            cuben[L][2][3] = self.cube[L][3][3]
+#            cuben[L][3][3] = self.cube[L][3][2]
+#            cuben[L][3][2] = self.cube[L][3][1]
+#            cuben[L][3][1] = self.cube[L][3][0]
+#            cuben[L][3][0] = self.cube[L][2][0]
+#            cuben[L][2][0] = self.cube[L][1][0]
+#            cuben[L][1][0] = T
+#            T = self.cube[L][1][1]
+#            cuben[L][1][1] = self.cube[L][1][2]
+#            cuben[L][1][2] = self.cube[L][2][2]
+#            cuben[L][2][2] = self.cube[L][2][1]
+#            cuben[L][2][1] = T
+#        self.cube = cuben.copy()
+
+# ------------------------------------------------------------------------------
     def rotateZcw(self):
         '''Rotate Cube clockwise from TOP view '''
         cuben = self.newCube(4, 4, 4)
