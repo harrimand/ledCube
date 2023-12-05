@@ -24,7 +24,7 @@ D = np.copy(C)
 
 def mvr(C, to, fr):
 """mvr(C,[5,6], [10,9]) where C = 4x4x4 cube
-    move cells on all columns to 5 frromm 11 and to 6 from 10
+    move cells on all columns to 5 frromm 10 and to 6 from 9
     select 1 page and 1 row
     pages 0..3, rows 0..3 columns 0..3
     page = [to,,fr] // 4  5 = page 1
@@ -43,7 +43,7 @@ def mvr(C, to, fr):
 
 def mvc(C, to, fr):
 """mvr(C,[5,6], [10,9]) where C = 4x4x4 cube
-    move cells on all rows to 5 frromm 11 and to 6 from 10
+    move cells on all rows to 5 frromm 10 and to 6 from 9
     select 1 page and 1 column
     pages 0..3, rows 0..3 columns 0..3
     page = [to,,fr] // 4  10 = page 2
@@ -62,7 +62,7 @@ def mvc(C, to, fr):
 
 def mvp(C, to, fr):
 """mvr(C,[5,6], [10,9]) where C = 4x4x4 cube
-    move cells on all pages to 5 from 11 and to 6 from 10
+    move cells on all pages to 5 from 10 and to 6 from 9
     select 1 row and 1 column
     pages 0..3, rows 0..3 columns 0..3
     page = all pages
