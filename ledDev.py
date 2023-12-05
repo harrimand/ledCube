@@ -23,14 +23,14 @@ D = np.copy(C)
 [D[2,:,2],D[2,:,1],D[1,:,2],D[1,:,1]]=[C[1,:,1],C[1,:,2],C[2,:,1],C[2,:,2]]
 
 def mvr(C, to, fr):
-"""mvr(C,[5,6], [10,9]) where C = 4x4x4 cube
-    move cells on all columns to 5 frromm 10 and to 6 from 9
-    select 1 page and 1 row
-    pages 0..3, rows 0..3 columns 0..3
-    page = [to,,fr] // 4  5 = page 1
-    row  = [to,fr] %  4   5 = row 1
-    col = all columns
-"""
+    """mvr(C,[5,6], [10,9]) where C = 4x4x4 cube
+        move cells on all columns to 5 frromm 11 and to 6 from 10
+        select 1 page and 1 row
+        pages 0..3, rows 0..3 columns 0..3
+        page = [to,,fr] // 4  5 = page 1
+        row  = [to,fr] %  4   5 = row 1
+        col = all columns
+    """
     D = np.copy(C)
     sz = np.size(C[0][0])
     for t, f in zip(to, fr):
@@ -42,14 +42,14 @@ def mvr(C, to, fr):
     return D
 
 def mvc(C, to, fr):
-"""mvr(C,[5,6], [10,9]) where C = 4x4x4 cube
-    move cells on all rows to 5 frromm 10 and to 6 from 9
-    select 1 page and 1 column
-    pages 0..3, rows 0..3 columns 0..3
-    page = [to,,fr] // 4  10 = page 2
-    row = all rows
-    col  = [to,fr] %  4   10 = column 2
-"""
+    """mvr(C,[5,6], [10,9]) where C = 4x4x4 cube
+        move cells on all rows to 5 frromm 11 and to 6 from 10
+        select 1 page and 1 column
+        pages 0..3, rows 0..3 columns 0..3
+        page = [to,,fr] // 4  10 = page 2
+        row = all rows
+        col  = [to,fr] %  4   10 = column 2
+    """
     D = np.copy(C)
     sz = np.size(C[0][0])
     for t, f in zip(to, fr):
@@ -61,14 +61,14 @@ def mvc(C, to, fr):
     return D
 
 def mvp(C, to, fr):
-"""mvr(C,[5,6], [10,9]) where C = 4x4x4 cube
-    move cells on all pages to 5 from 10 and to 6 from 9
-    select 1 row and 1 column
-    pages 0..3, rows 0..3 columns 0..3
-    page = all pages
-    row = [to,,fr] // 4  9 = row 2
-    col  = [to,fr] %  4  9 =  column 1
-"""
+    """mvr(C,[5,6], [10,9]) where C = 4x4x4 cube
+        move cells on all pages to 5 from 11 and to 6 from 10
+        select 1 row and 1 column
+        pages 0..3, rows 0..3 columns 0..3
+        page = all pages
+        row = [to,,fr] // 4  9 = row 2
+        col  = [to,fr] %  4  9 =  column 1
+    """
     D = np.copy(C)
     sz = np.size(C[0][0])
     for t, f in zip(to, fr):
@@ -79,6 +79,43 @@ def mvp(C, to, fr):
         D[:,rt,ct] = C[:,rf,cf]
     return D
 
+def shiftP(C,dir=1):
+    """shiftP(C, dir=1)
+       Shift Cube All Pages up or down
+        C:  Cube n x n x n matrix
+        dir:  1 = shift Up | -1 = shift Down
+    """
+    sz = np.size(C[0][0])
+    D = np.zeros_like(C)
+    for n in range(sz):
+        D[n] = C[(n+dir)%sz]
+    return D
+
+def shiftR(C, dir=1):
+    """shiftR(C, dir=1)
+       Shift Cube All Rows  up or down
+        C:  Cube n x n x n matrix
+        dir:  1 = shift Up | -1 = shift Down
+    """
+    sz = np.size(C[0][0])
+    # D = np.zeros_like(C)
+    D = np.rot90(C, 1, axes=(0,1))
+    D = shiftP(D, dir)
+    D = np.rot90(D, 1, axes=(1,0))
+    return D
+
+def shiftC(C, dir=1):
+    """shiftR(C, dir=1)
+       Shift Cube All Columns right or left
+        C:  Cube n x n x n matrix
+        dir:  1 = shift Up | -1 = shift Down
+    """
+    sz = np.size(C[0][0])
+    # D = np.zeros_like(C)
+    D = np.rot90(C, 1, axes=(0,2))
+    D = shiftP(D, dir)
+    D = np.rot90(D, 1, axes=(2,0))
+    return D
 
 
 
